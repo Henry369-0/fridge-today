@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* 系列色板：纸 / 墨 / 砖红 / 墨绿 / 芥末黄 */
+@theme {
+  --color-paper: #f2ead9;
+  --color-ink: #2b2b26;
+  --color-brick: #b5482a;
+  --color-pine: #3f5c4e;
+  --color-mustard: #d9a441;
+
+  --font-serif: Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+}
+
+body {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  /* 淡淡的网点，印刷纸感 */
+  background-image: radial-gradient(rgba(43, 43, 38, 0.05) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+/* 纸墨复古的"印刷框"：实线描边 + 硬投影 */
+.frame {
+  border: 2px solid var(--color-ink);
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+.btn-brick {
+  background: var(--color-brick);
+  color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 0 var(--color-ink);
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+.btn-brick:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--color-ink);
+}
+.btn-brick:disabled {
+  opacity: 0.45;
+}
+
+.btn-ink {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: 2px solid var(--color-ink);
+}
+.btn-ink:active {
+  transform: translate(1px, 1px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+}
+.chip-on {
+  background: var(--color-pine);
+  color: var(--color-paper);
+}
+.chip-uncertain {
+  border-style: dashed;
+  border-color: var(--color-brick);
+  color: var(--color-brick);
+}
+
+.chip-mini {
+  display: inline-block;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
+  padding: 0 0.45rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.chip-mini-on {
+  background: rgba(63, 92, 78, 0.12);
+}
+.chip-mini-missing {
+  border-color: var(--color-brick);
+  color: var(--color-brick);
+  background: rgba(181, 72, 42, 0.08);
+}
