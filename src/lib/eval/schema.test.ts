@@ -203,4 +203,20 @@ describe("页面状态机", () => {
     s = reducer(s, { type: "EXIT_COOKING" });
     expect(s.stage).toBe("upload");
   });
+  it("从历史复做完成后回首页，不进入空结果页", () => {
+    let s = reducer(initialState, { type: "SELECT_RECIPE", recipe: mkRecipe() });
+    s = reducer(s, { type: "FINISH_COOKING" });
+    expect(s.stage).toBe("upload");
+    expect(s.selected).toBeNull();
+    expect(s.notice).toBe("已记入「最近做过」");
+  });
+  it("从当前结果退出厨房保留菜谱列表", () => {
+    const recipes = [mkRecipe()];
+    let s = reducer(initialState, { type: "RECIPES_READY", recipes, mock: true });
+    s = reducer(s, { type: "SELECT_RECIPE", recipe: recipes[0] });
+    s = reducer(s, { type: "EXIT_COOKING" });
+    expect(s.stage).toBe("results");
+    expect(s.recipes).toEqual(recipes);
+    expect(s.selected).toBeNull();
+  });
 });

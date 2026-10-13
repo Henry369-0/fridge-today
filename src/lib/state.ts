@@ -76,7 +76,12 @@ export function reducer(state: State, action: Action): State {
     case "SELECT_RECIPE":
       return { ...state, stage: "cooking", selected: action.recipe };
     case "FINISH_COOKING":
-      return { ...state, stage: "results", selected: null, notice: "已记入「最近做过」" };
+      return {
+        ...state,
+        stage: state.recipes.length > 0 ? "results" : "upload",
+        selected: null,
+        notice: "已记入「最近做过」",
+      };
     case "EXIT_COOKING":
       return { ...state, stage: state.recipes.length > 0 ? "results" : "upload", selected: null };
     case "RESET":
